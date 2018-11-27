@@ -12,9 +12,14 @@ class ToDoListTVC: UITableViewController {
     
     var items = [String]()
     
+    let defaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        if let itemsArray = defaults.array(forKey: "ToDoItems") as? [String] {
+            items = itemsArray
+        }
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -28,6 +33,7 @@ class ToDoListTVC: UITableViewController {
         let okayAction = UIAlertAction(title: "Add", style: .default) { _ in
             if let newItem = textField.text {
                 self.items.insert(newItem, at: 0)
+                self.defaults.set(self.items, forKey: "ToDoItems")
                 self.tableView.reloadData()
             }
         }
