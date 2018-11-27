@@ -33,6 +33,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Just Do It" id="XR6-GO-yg7">
                         <barButtonItem key="backBarButtonItem" title=" " id="n7f-vK-4SC"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uQx-By-EFx">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addNewItem:" destination="3u3-cg-ise" id="qsc-ZY-Z1G"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Cf-LB-OKB" userLabel="First Responder" sceneMemberID="firstResponder"/>

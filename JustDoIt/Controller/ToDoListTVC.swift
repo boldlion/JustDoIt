@@ -10,10 +10,32 @@ import UIKit
 
 class ToDoListTVC: UITableViewController {
     
-    let items = ["Work", "write code", "watch a movie", "talk to a friend"]
-
+    var items = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    @IBAction func addNewItem(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        
+        let alertController = UIAlertController(title: "Add New To-Do Item", message: nil, preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: { alertTextField in
+            alertTextField.placeholder = "Enter your To-Do Item here..."
+            textField = alertTextField
+        })
+        let okayAction = UIAlertAction(title: "Add", style: .default) { _ in
+            if let newItem = textField.text {
+                self.items.insert(newItem, at: 0)
+                self.tableView.reloadData()
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(okayAction)
+        alertController.addAction(cancelAction)
+
+        present(alertController, animated: true, completion: nil)
         
     }
     
