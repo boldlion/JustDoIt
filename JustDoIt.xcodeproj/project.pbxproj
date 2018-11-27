@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		033C794621AC3A96008CA5F1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C794521AC3A96008CA5F1 /* AppDelegate.swift */; };
-		033C794821AC3A96008CA5F1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C794721AC3A96008CA5F1 /* ViewController.swift */; };
+		033C794821AC3A96008CA5F1 /* ToDoListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C794721AC3A96008CA5F1 /* ToDoListTVC.swift */; };
 		033C794B21AC3A96008CA5F1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033C794921AC3A96008CA5F1 /* Main.storyboard */; };
 		033C794D21AC3A97008CA5F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 033C794C21AC3A97008CA5F1 /* Assets.xcassets */; };
 		033C795021AC3A97008CA5F1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 033C794E21AC3A97008CA5F1 /* LaunchScreen.storyboard */; };
+		033C795B21AC4FCE008CA5F1 /* ToDoItemTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C795A21AC4FCE008CA5F1 /* ToDoItemTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		033C794221AC3A96008CA5F1 /* JustDoIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustDoIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		033C794521AC3A96008CA5F1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		033C794721AC3A96008CA5F1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		033C794721AC3A96008CA5F1 /* ToDoListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTVC.swift; sourceTree = "<group>"; };
 		033C794A21AC3A96008CA5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		033C794C21AC3A97008CA5F1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		033C794F21AC3A97008CA5F1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		033C795121AC3A97008CA5F1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		033C795A21AC4FCE008CA5F1 /* ToDoItemTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,39 @@
 		033C794421AC3A96008CA5F1 /* JustDoIt */ = {
 			isa = PBXGroup;
 			children = (
+				033C795921AC4F97008CA5F1 /* Controller */,
+				033C795821AC4F81008CA5F1 /* View */,
+				033C795721AC4F79008CA5F1 /* Model */,
 				033C794521AC3A96008CA5F1 /* AppDelegate.swift */,
-				033C794721AC3A96008CA5F1 /* ViewController.swift */,
 				033C794921AC3A96008CA5F1 /* Main.storyboard */,
 				033C794C21AC3A97008CA5F1 /* Assets.xcassets */,
 				033C794E21AC3A97008CA5F1 /* LaunchScreen.storyboard */,
 				033C795121AC3A97008CA5F1 /* Info.plist */,
 			);
 			path = JustDoIt;
+			sourceTree = "<group>";
+		};
+		033C795721AC4F79008CA5F1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		033C795821AC4F81008CA5F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				033C795A21AC4FCE008CA5F1 /* ToDoItemTVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		033C795921AC4F97008CA5F1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				033C794721AC3A96008CA5F1 /* ToDoListTVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +162,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				033C794821AC3A96008CA5F1 /* ViewController.swift in Sources */,
+				033C795B21AC4FCE008CA5F1 /* ToDoItemTVC.swift in Sources */,
+				033C794821AC3A96008CA5F1 /* ToDoListTVC.swift in Sources */,
 				033C794621AC3A96008CA5F1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +317,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.JustDoIt;
+				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,7 +335,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.JustDoIt;
+				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
