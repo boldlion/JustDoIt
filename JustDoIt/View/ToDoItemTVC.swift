@@ -14,5 +14,20 @@ class ToDoItemTVC: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    var item: Item? {
+        didSet{
+            updateView()
+        }
+    }
+    
+    func updateView() {
+        if let title = item?.title {
+            self.textLabel?.text = title
+        }
+        
+        if let done = item?.done  {
+            accessoryType = done ? .checkmark : .none
+        }
+    }
 }
