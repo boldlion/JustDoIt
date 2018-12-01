@@ -10,23 +10,13 @@ import UIKit
 
 class ToDoListTVC: UITableViewController {
     
-   // var items = [String]()
     var items = [Item]()
 
-    
-    let defaults = UserDefaults.standard
+    let dataPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let item1 = Item(title: "Blah blah")
-        let item2 = Item(title: "Blah blah")
-        items.append(item1)
-        items.append(item2)
-        
-        if let itemsArray = defaults.array(forKey: "ToDoItems") as? [Item] {
-            items = itemsArray
-        }
+        fetchItems()
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -39,10 +29,9 @@ class ToDoListTVC: UITableViewController {
         })
         let okayAction = UIAlertAction(title: "Add", style: .default) { _ in
             if let itemTitle = textField.text {
-                 let item = Item(title: itemTitle)
+                let item = Item(title: itemTitle)
                 self.items.insert(item, at: 0)
-                //self.defaults.set(self.items, forKey: "ToDoItems")
-                self.tableView.reloadData()
+                self.saveData()
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -66,8 +55,33 @@ class ToDoListTVC: UITableViewController {
     // MARK: - Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         items[indexPath.row].done = !items[indexPath.row].done
-        tableView.reloadData()
+        saveData()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func saveData() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(items)
+            try data.write(to: dataPath!)
+        }
+        catch {
+            print("Error while encoding items array", error)
+        }
+        tableView.reloadData()
+    }
+    
+    func fetchItems() {
+    
+        if let data = try? Data(contentsOf: dataPath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                items = try decoder.decode([Item].self, from: data)
+            }
+            catch {
+                print("error decoding items", error.localizedDescription)
+            }
+        }
     }
     
 }
