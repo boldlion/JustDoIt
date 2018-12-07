@@ -16,6 +16,7 @@
 		033C796021B2D087008CA5F1 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 033C795E21B2D087008CA5F1 /* DataModel.xcdatamodeld */; };
 		033C798321B7D6BB008CA5F1 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C798221B7D6BB008CA5F1 /* CategoryTVC.swift */; };
 		033C798521B7ED1A008CA5F1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C798421B7ED1A008CA5F1 /* CategoryCell.swift */; };
+		4A2C3B8F5837970CBA6FCDB9 /* Pods_JustDoIt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F1BBDF391E98676AF90F251 /* Pods_JustDoIt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,9 @@
 		033C795F21B2D087008CA5F1 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		033C798221B7D6BB008CA5F1 /* CategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
 		033C798421B7ED1A008CA5F1 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		2F1BBDF391E98676AF90F251 /* Pods_JustDoIt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustDoIt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACBB9641887FD01FA099E3D2 /* Pods-JustDoIt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustDoIt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt.debug.xcconfig"; sourceTree = "<group>"; };
+		DD763EE3F1A519D2F8899377 /* Pods-JustDoIt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustDoIt.release.xcconfig"; path = "Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A2C3B8F5837970CBA6FCDB9 /* Pods_JustDoIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,8 @@
 			children = (
 				033C794421AC3A96008CA5F1 /* JustDoIt */,
 				033C794321AC3A96008CA5F1 /* Products */,
+				FFA305D3225652261958293F /* Pods */,
+				B7894BE27F135F77B23D7C9F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +107,23 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		B7894BE27F135F77B23D7C9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F1BBDF391E98676AF90F251 /* Pods_JustDoIt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FFA305D3225652261958293F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ACBB9641887FD01FA099E3D2 /* Pods-JustDoIt.debug.xcconfig */,
+				DD763EE3F1A519D2F8899377 /* Pods-JustDoIt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -107,9 +131,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 033C795421AC3A97008CA5F1 /* Build configuration list for PBXNativeTarget "JustDoIt" */;
 			buildPhases = (
+				C169D369302619741FA19CD9 /* [CP] Check Pods Manifest.lock */,
 				033C793E21AC3A96008CA5F1 /* Sources */,
 				033C793F21AC3A96008CA5F1 /* Frameworks */,
 				033C794021AC3A96008CA5F1 /* Resources */,
+				BDA11AEEB9B81886F5FF5DF2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,6 +191,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDA11AEEB9B81886F5FF5DF2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C169D369302619741FA19CD9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JustDoIt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		033C793E21AC3A96008CA5F1 /* Sources */ = {
@@ -320,15 +387,13 @@
 		};
 		033C795521AC3A97008CA5F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACBB9641887FD01FA099E3D2 /* Pods-JustDoIt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = JustDoIt/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -338,15 +403,13 @@
 		};
 		033C795621AC3A97008CA5F1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD763EE3F1A519D2F8899377 /* Pods-JustDoIt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = JustDoIt/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
