@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,13 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        do {
+            _ = try Realm()
+        }
+        catch {
+            print("Error while initializing new realm", error.localizedDescription)
+        }
+        
         UINavigationBar.appearance().tintColor = .white
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

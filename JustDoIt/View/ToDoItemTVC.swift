@@ -24,6 +24,8 @@ class ToDoItemTVC: UITableViewCell {
     func updateView() {
         if let title = item?.title {
             self.textLabel?.text = title
+        } else {
+            self.textLabel?.text = "No items yet"
         }
         
         if let done = item?.done  {

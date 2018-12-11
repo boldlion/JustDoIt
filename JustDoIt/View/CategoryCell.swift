@@ -24,6 +24,8 @@ class CategoryCell: UITableViewCell {
     func updateView() {
         if let name = category?.name {
             self.textLabel?.text = name
+        } else {
+            self.textLabel?.text = "No categories added yet"
         }
     }
 

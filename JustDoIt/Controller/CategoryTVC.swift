@@ -5,13 +5,13 @@
 //  Created by Bold Lion on 5.12.18.
 //  Copyright © 2018 Bold Lion. All rights reserved.
 //
-import CoreData
 import UIKit
+import RealmSwift
 
 class CategoryTVC: UITableViewController {
     
-    var categories = [Category]()
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
+    var categories: Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +24,10 @@ class CategoryTVC: UITableViewController {
         let alert = UIAlertController(title: "Add new category", message: nil, preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { _ in
             if let name = textField.text {
-                let category = Category(context: self.context)
+                let category = Category()
                 category.name = name
-                self.categories.append(category)
-                self.saveCategories()
+                self.saveCategories(category: category)
             }
-            
         })
         let cancel = UIAlertAction(title: "Cancel", style: .destructive)
         
@@ -47,14 +45,16 @@ class CategoryTVC: UITableViewController {
         if segue.identifier == "goToItems" {
             let destination = segue.destination as! ToDoListTVC
             if let indexPath = tableView.indexPathForSelectedRow {
-                destination.selectedCategory = categories[indexPath.row]
+                destination.selectedCategory = categories?[indexPath.row]
             }
         }
     }
     
-    func saveCategories() {
+    func saveCategories(category: Category) {
         do {
-            try context.save()
+            try realm.write {
+                realm.add(category)
+            }
         }
         catch {
             print("Error saving categories:", error.localizedDescription)
@@ -62,25 +62,20 @@ class CategoryTVC: UITableViewController {
         tableView.reloadData()
     }
     
-    func fetchCategories(with request: NSFetchRequest <Category> = Category.fetchRequest()) {
-        do {
-            categories = try context.fetch(request)
-        }
-        catch {
-            print("Error while fetching Categories from context:", error.localizedDescription)
-        }
+    func fetchCategories() {
+        categories = realm.objects(Category.self)
         tableView.reloadData()
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
-        cell.category = categories[indexPath.row]
+        cell.category = categories?[indexPath.row]
         return cell
     }
     

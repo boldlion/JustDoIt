@@ -7,22 +7,17 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ToDoListTVC: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
-    var items = [Item]()
+    let realm = try! Realm()
+    var items: Results<Item>?
     var selectedCategory : Category? {
         didSet {
             fetchItems()
         }
-    }
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -34,14 +29,20 @@ class ToDoListTVC: UITableViewController {
             textField = alertTextField
         })
         let okayAction = UIAlertAction(title: "Add", style: .default) { _ in
-            if let title = textField.text {
-                let item = Item(context: self.context)
-                item.done = false
-                item.title = title
-                item.parentCategory = self.selectedCategory
-                self.items.insert(item, at: 0)
-                self.saveData()
+            if let title = textField.text, let category = self.selectedCategory {
+                do {
+                    try self.realm.write {
+                        let item = Item()
+                        item.title = title
+                        item.dateCreated = Date()
+                        category.items.append(item)
+                    }
+                }
+                catch {
+                    print("Error while saving the item: ", (error.localizedDescription) )
+                }
             }
+            self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addAction(okayAction)
@@ -52,48 +53,36 @@ class ToDoListTVC: UITableViewController {
     
     // MARK: - Data Source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return items?.count ?? 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell") as! ToDoItemTVC
-        cell.item = items[indexPath.row]
+        cell.item = items?[indexPath.row]
         return cell
     }
     
     // MARK: - Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        items[indexPath.row].done = !items[indexPath.row].done
-        saveData()
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func saveData() {
-        do {
-           try context.save()
-        }
-        catch {
-            print("Error while saving the context", error)
+       
+        if let item = items?[indexPath.row] {
+            do {
+                try realm.write {
+                    //realm.delete(item)
+                    item.done = !item.done
+                }
+            }
+            catch {
+                print("Error while updating the status: ", error.localizedDescription)
+            }
         }
         tableView.reloadData()
+        tableView.deselectRow(at: indexPath, animated: true)
+      
     }
     
-    func fetchItems(with request: NSFetchRequest <Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
-        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
-        
-        if let additionalPredicate = predicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
-        }
-        else {
-            request.predicate = categoryPredicate
-        }
-        
-        do {
-            items = try context.fetch(request)
-        }
-        catch {
-            print("Error while fetching Items from context:", error.localizedDescription )
-        }
+    func fetchItems() {
+        items = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
         tableView.reloadData()
     }
     
@@ -101,14 +90,12 @@ class ToDoListTVC: UITableViewController {
 
 // MARK: - Search Bar Methods
 extension ToDoListTVC: UISearchBarDelegate {
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let request: NSFetchRequest <Item> = Item.fetchRequest()
-        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
-        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
-        fetchItems(with: request, predicate: predicate)
-     }
-    
+        items = items?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "dateCreated", ascending: true)
+        tableView.reloadData()
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             fetchItems()
