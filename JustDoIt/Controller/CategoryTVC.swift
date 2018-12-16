@@ -7,25 +7,28 @@
 //
 import UIKit
 import RealmSwift
+import SwipeCellKit
+import ChameleonFramework
 
-class CategoryTVC: UITableViewController {
+class CategoryTVC: SwipeTVC {
     
     let realm = try! Realm()
     var categories: Results<Category>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 80
         fetchCategories()
     }
 
     @IBAction func addCategoryTapped(_ sender: Any) {
         var textField = UITextField()
-        
         let alert = UIAlertController(title: "Add new category", message: nil, preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default, handler: { _ in
             if let name = textField.text {
                 let category = Category()
                 category.name = name
+                category.backgroundColor = RandomFlatColor().hexValue()
                 self.saveCategories(category: category)
             }
         })
@@ -35,12 +38,11 @@ class CategoryTVC: UITableViewController {
             alertTextField.placeholder = "New Category Name"
             textField = alertTextField
         }
-        
         alert.addAction(cancel)
         alert.addAction(addAction)
         present(alert, animated: true, completion: nil)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToItems" {
             let destination = segue.destination as! ToDoListTVC
@@ -49,7 +51,7 @@ class CategoryTVC: UITableViewController {
             }
         }
     }
-    
+    // MARK: - Data Methods
     func saveCategories(category: Category) {
         do {
             try realm.write {
@@ -67,15 +69,33 @@ class CategoryTVC: UITableViewController {
         tableView.reloadData()
     }
     
-    // MARK: - Table view data source
+    override func updateModel(at indexPath: IndexPath) {
+        do {
+            if let category = self.categories?[indexPath.row] {
+                try self.realm.write {
+                    self.realm.delete(category)
+                }
+            }
+        }
+        catch {
+            print("Error deleting the category: ", error.localizedDescription)
+        }
+    }
     
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell") as! CategoryCell
-        cell.category = categories?[indexPath.row]
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        
+        if let category = categories?[indexPath.row] {
+            cell.textLabel?.text = category.name
+            guard let catColor = UIColor(hexString: category.backgroundColor) else { fatalError() }
+            cell.textLabel?.textColor = ContrastColorOf(catColor, returnFlat: true)
+            cell.backgroundColor = catColor
+        }
         return cell
     }
     

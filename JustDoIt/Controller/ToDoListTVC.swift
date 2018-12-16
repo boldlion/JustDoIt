@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class ToDoListTVC: UITableViewController {
+class ToDoListTVC: SwipeTVC {
     
     @IBOutlet weak var searchBar: UISearchBar!
     let realm = try! Realm()
@@ -18,6 +19,22 @@ class ToDoListTVC: UITableViewController {
         didSet {
             fetchItems()
         }
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = 80
+        tableView.separatorStyle = .none
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        title = selectedCategory?.name
+        guard let color = selectedCategory?.backgroundColor else { fatalError() }
+        setNavBar(withHexColor: color)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavBar(withHexColor: "DA7553")
     }
     
     @IBAction func addNewItem(_ sender: UIBarButtonItem) {
@@ -57,18 +74,49 @@ class ToDoListTVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell") as! ToDoItemTVC
-        cell.item = items?[indexPath.row]
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if let item = items?[indexPath.row] {
+            cell.textLabel?.text = item.title
+            if let catColor = UIColor(hexString: selectedCategory!.backgroundColor)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(items!.count)) {
+    
+                cell.backgroundColor = catColor
+                cell.textLabel?.textColor = ContrastColorOf(catColor, returnFlat: true)
+            }
+            cell.accessoryType = item.done ? .checkmark : .none
+        }
+        else {
+            cell.textLabel?.text = "No items yet"
+        }
         return cell
+    }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = items?[indexPath.row] {
+            do {
+                try realm.write {
+                    realm.delete(item)
+                }
+            }
+            catch {
+                print("Error deleting an item: ", error.localizedDescription)
+            }
+        }
+    }
+    
+    func setNavBar(withHexColor hexColor: String) {
+        guard let navBar = navigationController?.navigationBar else { fatalError() }
+        guard let navBarTintColor = UIColor(hexString: hexColor) else { fatalError() }
+        navBar.barTintColor = navBarTintColor
+        searchBar.barTintColor = navBarTintColor
+        navBar.tintColor = ContrastColorOf(navBarTintColor, returnFlat: true)
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(navBarTintColor, returnFlat: true)]
     }
     
     // MARK: - Delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
         if let item = items?[indexPath.row] {
             do {
                 try realm.write {
-                    //realm.delete(item)
                     item.done = !item.done
                 }
             }
@@ -78,7 +126,6 @@ class ToDoListTVC: UITableViewController {
         }
         tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
-      
     }
     
     func fetchItems() {

@@ -23,8 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         catch {
             print("Error while initializing new realm", error.localizedDescription)
         }
-        
-        UINavigationBar.appearance().tintColor = .white
         return true
     }
 
