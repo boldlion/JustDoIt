@@ -24,7 +24,7 @@ class CategoryTVC: SwipeTVC {
     @IBAction func addCategoryTapped(_ sender: Any) {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add new category", message: nil, preferredStyle: .alert)
-        let addAction = UIAlertAction(title: "Add", style: .default, handler: { _ in
+        let addAction = UIAlertAction(title: "Add", style: .default, handler: { [unowned self] _ in
             if let name = textField.text {
                 let category = Category()
                 category.name = name
@@ -93,7 +93,7 @@ class CategoryTVC: SwipeTVC {
         if let category = categories?[indexPath.row] {
             cell.textLabel?.text = category.name
             guard let catColor = UIColor(hexString: category.backgroundColor) else { fatalError() }
-            cell.textLabel?.textColor = ContrastColorOf(catColor, returnFlat: true)
+            cell.textLabel?.textColor = ContrastColorOf(backgroundColor: catColor, returnFlat: true)
             cell.backgroundColor = catColor
         }
         return cell

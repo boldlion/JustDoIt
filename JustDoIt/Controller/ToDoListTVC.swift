@@ -45,7 +45,7 @@ class ToDoListTVC: SwipeTVC {
             alertTextField.placeholder = "Enter your To-Do Item here..."
             textField = alertTextField
         })
-        let okayAction = UIAlertAction(title: "Add", style: .default) { _ in
+        let okayAction = UIAlertAction(title: "Add", style: .default) { [unowned self] _ in
             if let title = textField.text, let category = self.selectedCategory {
                 do {
                     try self.realm.write {
@@ -80,7 +80,7 @@ class ToDoListTVC: SwipeTVC {
             if let catColor = UIColor(hexString: selectedCategory!.backgroundColor)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(items!.count)) {
     
                 cell.backgroundColor = catColor
-                cell.textLabel?.textColor = ContrastColorOf(catColor, returnFlat: true)
+                cell.textLabel?.textColor = ContrastColorOf(backgroundColor: catColor, returnFlat: true)
             }
             cell.accessoryType = item.done ? .checkmark : .none
         }
@@ -108,8 +108,8 @@ class ToDoListTVC: SwipeTVC {
         guard let navBarTintColor = UIColor(hexString: hexColor) else { fatalError() }
         navBar.barTintColor = navBarTintColor
         searchBar.barTintColor = navBarTintColor
-        navBar.tintColor = ContrastColorOf(navBarTintColor, returnFlat: true)
-        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(navBarTintColor, returnFlat: true)]
+        navBar.tintColor = ContrastColorOf(backgroundColor: navBarTintColor, returnFlat: true)
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(backgroundColor: navBarTintColor, returnFlat: true)]
     }
     
     // MARK: - Delegate

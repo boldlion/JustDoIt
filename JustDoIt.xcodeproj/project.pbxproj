@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		033C795B21AC4FCE008CA5F1 /* ToDoItemTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C795A21AC4FCE008CA5F1 /* ToDoItemTVC.swift */; };
 		033C798321B7D6BB008CA5F1 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C798221B7D6BB008CA5F1 /* CategoryTVC.swift */; };
 		033C798521B7ED1A008CA5F1 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033C798421B7ED1A008CA5F1 /* CategoryCell.swift */; };
+		036A5CC422DDC01800F0B494 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036A5CC322DDC01800F0B494 /* RealmSwift.framework */; };
+		036A5CC622DDC02600F0B494 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036A5CC522DDC02600F0B494 /* Realm.framework */; };
 		03D130A321BAAA5E0081090C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D130A221BAAA5E0081090C /* Item.swift */; };
 		03D130A521BAAA6E0081090C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D130A421BAAA6E0081090C /* Category.swift */; };
 		03D130A821C271CF0081090C /* SwipeTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D130A721C271CF0081090C /* SwipeTVC.swift */; };
@@ -32,6 +34,8 @@
 		033C795A21AC4FCE008CA5F1 /* ToDoItemTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemTVC.swift; sourceTree = "<group>"; };
 		033C798221B7D6BB008CA5F1 /* CategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
 		033C798421B7ED1A008CA5F1 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		036A5CC322DDC01800F0B494 /* RealmSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		036A5CC522DDC02600F0B494 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D130A221BAAA5E0081090C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		03D130A421BAAA6E0081090C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		03D130A721C271CF0081090C /* SwipeTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTVC.swift; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				036A5CC622DDC02600F0B494 /* Realm.framework in Frameworks */,
+				036A5CC422DDC01800F0B494 /* RealmSwift.framework in Frameworks */,
 				4A2C3B8F5837970CBA6FCDB9 /* Pods_JustDoIt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +130,8 @@
 		B7894BE27F135F77B23D7C9F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				036A5CC522DDC02600F0B494 /* Realm.framework */,
+				036A5CC322DDC01800F0B494 /* RealmSwift.framework */,
 				2F1BBDF391E98676AF90F251 /* Pods_JustDoIt.framework */,
 			);
 			name = Frameworks;
@@ -149,7 +157,7 @@
 				033C793E21AC3A96008CA5F1 /* Sources */,
 				033C793F21AC3A96008CA5F1 /* Frameworks */,
 				033C794021AC3A96008CA5F1 /* Resources */,
-				BDA11AEEB9B81886F5FF5DF2 /* [CP] Embed Pods Frameworks */,
+				E06F8239D26DCC19C9AB67C6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,30 +215,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		BDA11AEEB9B81886F5FF5DF2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C169D369302619741FA19CD9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +231,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E06F8239D26DCC19C9AB67C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JustDoIt/Pods-JustDoIt-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -414,7 +415,10 @@
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = JustDoIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -431,7 +435,10 @@
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = JustDoIt/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.yovoiceJustDoIt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
